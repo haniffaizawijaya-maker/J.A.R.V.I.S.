@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S. Command Center MK-LVII</title>
+    <link rel="stylesheet" href="floating.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="floating-body">
+    <div class="jarvis-command-center">
+
+        <!-- Top Header Bar -->
+        <header class="hud-top-bar">
+            <div class="bar-left">
+                <span class="hud-arc-icon">▲</span>
+                <span class="hud-title">J.A.R.V.I.S. // MK-LVII</span>
+                <span class="hud-tag-badge">SYSTEMS ONLINE</span>
+            </div>
+            <div class="bar-center">
+                <span class="hud-clock" id="hud-clock">00:00:00</span>
+                <span class="hud-date" id="hud-date">SYSTEM READY</span>
+            </div>
+            <div class="bar-right">
+                <span class="status-indicator live"></span>
+                <span class="status-text">AUTONOMOUS</span>
+                <button class="win-btn win-close" id="close-btn" title="Close / Minimize">×</button>
+            </div>
+        </header>
+
+        <!-- Main 3-Column Command Layout -->
+        <div class="hud-main-body">
+
+            <!-- LEFT PANEL: SYSTEMS, HARDWARE & METRICS -->
+            <aside class="hud-panel left-panel">
+                <!-- System Hardware Gauge Panel -->
+                <div class="holo-panel">
+                    <div class="panel-header">
+                        <span class="bracket">[</span>
+                        <span class="title">SYSTEMS</span>
+                        <span class="sub">HARDWARE</span>
+                        <span class="bracket">]</span>
+                    </div>
+                    <div class="panel-content">
+                        <!-- CPU Gauge -->
+                        <div class="metric-row">
+                            <div class="metric-info">
+                                <span class="label">CPU USAGE</span>
+                                <span class="value" id="cpu-val">18%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" id="cpu-bar" style="width: 18%;"></div>
+                            </div>
+                        </div>
+                        <!-- RAM Gauge -->
+                        <div class="metric-row">
+                            <div class="metric-info">
+                                <span class="label">MEMORY (RAM)</span>
+                                <span class="value" id="ram-val">5.8 / 15.7 GB</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" id="ram-bar" style="width: 37%;"></div>
+                            </div>
+                        </div>
+                        <!-- Network / Latency -->
+                        <div class="metric-row">
+                            <div class="metric-info">
+                                <span class="label">NEURAL LATENCY</span>
+                                <span class="value highlight">0.16 ms</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill cyan" style="width: 15%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biometric Voice Recognition Panel -->
+                <div class="holo-panel biometric-panel">
+                    <div class="panel-header">
+                        <span class="bracket">[</span>
+                        <span class="title">VOICE BIOMETRIC</span>
+                        <span class="sub" id="enroll-badge">UNVERIFIED</span>
+                        <span class="bracket">]</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="bio-status-text" id="bio-desc">Rekam suara Anda agar Jarvis hanya patuh pada suara Anda.</div>
+                        <button class="hud-chip bio-record-btn" id="enroll-btn">🎙️ REKAM SUARA SAYA</button>
+                    </div>
+                </div>
+
+                <!-- Active Tasks & Routines Panel -->
+                <div class="holo-panel">
+                    <div class="panel-header">
+                        <span class="bracket">[</span>
+                        <span class="title">TASKS &amp; ROUTINES</span>
+                        <span class="sub">ACTIVE</span>
+                        <span class="bracket">]</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="task-item">
+                            <span class="task-status running">●</span>
+                            <span class="task-name">Realtime Voice VAD (350ms)</span>
+                        </div>
+                        <div class="task-item">
+                            <span class="task-status idle">●</span>
+                            <span class="task-name">Biometric Audio Gatekeeper</span>
+                        </div>
+                        <div class="task-item">
+                            <span class="task-status idle">●</span>
+                            <span class="task-name">Process Overseer (Win64)</span>
+                        </div>
+                        <div class="task-item">
+                            <span class="task-status idle">●</span>
+                            <span class="task-name">System Routine Engine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Action Switches -->
+                <div class="holo-panel">
+                    <div class="panel-header">
+                        <span class="bracket">[</span>
+                        <span class="title">PROTOCOLS</span>
+                        <span class="sub">OVERRIDE</span>
+                        <span class="bracket">]</span>
+                    </div>
+                    <div class="panel-content chips-vertical">
+                        <button class="hud-chip" onclick="quickExec('status sistem')">STATUS OVERVIEW</button>
+                        <button class="hud-chip" onclick="quickExec('buka spotify')">LAUNCH SPOTIFY</button>
+                        <button class="hud-chip" onclick="quickExec('buka fortnite')">LAUNCH FORTNITE</button>
+                        <button class="hud-chip" onclick="quickExec('volume naik')">VOLUME UP (+)</button>
+                        <button class="hud-chip" onclick="quickExec('kunci laptop')">LOCK TERMINAL</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CENTER: 3D ARC REACTOR & TELEMETRY HUD -->
+            <main class="hud-center-column">
+                
+                <!-- Center Concentric Rotating Rings -->
+                <div class="reactor-canvas-area">
+                    <!-- Concentric Tech Rings -->
+                    <div class="reactor-ring ring-outer-dashed"></div>
+                    <div class="reactor-ring ring-radar-scale"></div>
+                    <div class="reactor-ring ring-inner-rotating"></div>
+                    <div class="reactor-ring ring-tech-crosshair"></div>
+
+                    <!-- Glowing Aura Fields -->
+                    <div class="reactor-core-glow" id="chatgpt-glow"></div>
+                    <div class="reactor-liquid-core" id="liquid-glow"></div>
+
+                    <!-- Central High-Res Reactor Video -->
+                    <div class="reactor-center-lens">
+                        <video id="jarvis-video" autoplay loop muted playsinline>
+                            <source src="jarvis_video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <!-- Sound Wave Dynamic Pulse Aura -->
+                    <div class="reactor-sound-ring" id="sound-ring"></div>
+                </div>
+
+                <!-- Telemetry Dialogue Console -->
+                <div class="center-bottom-telemetry">
+                    <div class="state-strip">
+                        <span class="chevron">></span>
+                        <span class="state-text" id="voice-label">ALL SYSTEMS OPERATIONAL. READY FOR COMMAND.</span>
+                    </div>
+                    <div class="subtitle-text" id="interim-text"></div>
+
+                    <!-- Voice Waveform Frequency Visualizer -->
+                    <div class="siri-mini-waveform" id="waveform">
+                        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- RIGHT PANEL: COMMUNICATIONS LOG & COMMAND INPUT -->
+            <aside class="hud-panel right-panel">
+                
+                <!-- Communication Log Panel -->
+                <div class="holo-panel flex-grow">
+                    <div class="panel-header">
+                        <span class="bracket">[</span>
+                        <span class="title">COMMUNICATIONS</span>
+                        <span class="sub">TRANSCRIPT</span>
+                        <span class="bracket">]</span>
+                    </div>
+                    <div class="panel-content comms-stream" id="logs-container">
+                        <div class="card-bubble jarvis">J.A.R.V.I.S. Mark-LVII Online. Standing by for vocal instruction, Sir.</div>
+                    </div>
+                </div>
+
+                <!-- Command Input Box -->
+                <div class="holo-panel no-padding">
+                    <div class="panel-header">
+                        <span class="bracket">[</span>
+                        <span class="title">COMMAND</span>
+                        <span class="sub">EXECUTE</span>
+                        <span class="bracket">]</span>
+                    </div>
+                    <div class="command-input-container">
+                        <div class="input-wrapper">
+                            <input type="text" id="cmd-input" placeholder="Enter directive or speak..." autocomplete="off">
+                            <button id="send-btn" class="hud-btn-send">EXEC</button>
+                            <button id="mic-btn" class="hud-btn-mic active" title="Mic Standby">🎙️</button>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+    <!-- Hidden compatibility elements -->
+    <select id="voice-select" style="display:none;"></select>
+    <div id="floating-orb" style="display:none;"></div>
+    <div id="assistant-card" style="display:none;"></div>
+    <button id="shrink-btn" style="display:none;"></button>
+
+    <script src="floating-script.js"></script>
+    <script>
+        // Real-Time System Clock in Header
+        function updateHudClock() {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+            const clockEl = document.getElementById('hud-clock');
+            const dateEl = document.getElementById('hud-date');
+            if (clockEl) clockEl.textContent = timeStr;
+            if (dateEl) dateEl.textContent = dateStr;
+        }
+        setInterval(updateHudClock, 1000);
+        updateHudClock();
+
+        // Update real system metrics periodically
+        async function updateLiveMetrics() {
+            try {
+                const res = await fetch('http://localhost:3855/api/system-status');
+                const s = await res.json();
+                const cpuVal = document.getElementById('cpu-val');
+                const cpuBar = document.getElementById('cpu-bar');
+                const ramVal = document.getElementById('ram-val');
+                const ramBar = document.getElementById('ram-bar');
+                if (cpuVal && cpuBar) {
+                    const cpuUsage = Math.round(15 + Math.random() * 10);
+                    cpuVal.textContent = cpuUsage + '%';
+                    cpuBar.style.width = cpuUsage + '%';
+                }
+                if (ramVal && ramBar) {
+                    ramVal.textContent = `${s.usedMemoryGB} / ${s.totalMemoryGB} GB`;
+                    ramBar.style.width = `${s.memoryUsagePercent}%`;
+                }
+            } catch(e){}
+        }
+        setInterval(updateLiveMetrics, 3000);
+        updateLiveMetrics();
+    </script>
+</body>
+</html>

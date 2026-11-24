@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment & Sensitive Keys
+.env
+config.json
+
+# Biometric & Temporary Audio Files
+*.wav
+temp_*.mp3
+test_*.mp3
+
+# Log files
+*.log
+.system_generated/

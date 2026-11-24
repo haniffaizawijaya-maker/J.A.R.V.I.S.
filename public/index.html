@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S. | Siri Intelligent Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="siri-theme">
+    <!-- Ambient Dynamic Glow Backdrop -->
+    <div class="siri-ambient-glow" id="ambient-glow"></div>
+
+    <div class="siri-container">
+        <!-- Top Minimalist Bar -->
+        <header class="siri-top-bar">
+            <div class="siri-brand">
+                <span class="siri-pill">J.A.R.V.I.S.</span>
+                <span class="siri-subtitle">Intelligent Assistant</span>
+            </div>
+            <div class="siri-time-box">
+                <span id="system-time">00:00</span>
+                <div class="siri-status-dot active" title="Standby & Listening"></div>
+            </div>
+        </header>
+
+        <!-- Main Conversational Showcase (Apple Style) -->
+        <main class="siri-main">
+            <!-- Floating Holographic Orb Centerpiece -->
+            <div class="siri-orb-stage">
+                <div class="siri-glow-rings"></div>
+                <div class="siri-orb-wrapper" id="video-wrapper">
+                    <video id="jarvis-video" autoplay loop muted playsinline>
+                        <source src="jarvis_video.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <!-- Dynamic Conversation Bubble Flow -->
+            <div class="siri-dialogue-stage">
+                <h1 class="siri-prompt" id="voice-label">Ada yang bisa Jarvis bantu hari ini?</h1>
+                <p class="siri-interim" id="interim-text"></p>
+
+                <!-- Siri Reactive Waveform Orb -->
+                <div class="siri-waveform" id="waveform">
+                    <div class="siri-wave-bar"></div>
+                    <div class="siri-wave-bar"></div>
+                    <div class="siri-wave-bar"></div>
+                    <div class="siri-wave-bar"></div>
+                    <div class="siri-wave-bar"></div>
+                </div>
+
+                <!-- Chat Cards History -->
+                <div class="siri-cards-container" id="logs-container">
+                    <div class="siri-card jarvis">
+                        <div class="siri-card-header">
+                            <span class="siri-avatar">J</span>
+                            <span class="siri-name">Jarvis</span>
+                        </div>
+                        <p class="siri-text">Halo! Saya Jarvis, asisten cerdas Anda. Katakan saja apa yang Anda butuhkan, seperti membuka aplikasi, musik, cuaca, atau sekadar mengobrol.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sleek Input Pill -->
+            <div class="siri-input-wrapper">
+                <div class="siri-input-pill">
+                    <button id="mic-btn" class="siri-mic-btn active" title="Mikrofon Standby">
+                        <svg class="siri-mic-svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path fill="currentColor" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                    </button>
+                    <input type="text" id="cmd-input" placeholder="Tanya atau perintahkan apa saja kepada Jarvis..." autocomplete="off">
+                    <button id="send-btn" class="siri-send-btn">
+                        <svg viewBox="0 0 24 24" class="send-svg">
+                            <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Quick Suggestion Chips -->
+                <div class="siri-chips">
+                    <button class="siri-chip" onclick="quickExec('buka whatsapp')">Buka WhatsApp</button>
+                    <button class="siri-chip" onclick="quickExec('putar musik di spotify')">Putar Spotify</button>
+                    <button class="siri-chip" onclick="quickExec('buka youtube')">Buka YouTube</button>
+                    <button class="siri-chip" onclick="quickExec('jam berapa sekarang?')">Jam Berapa?</button>
+                    <button class="siri-chip" onclick="quickExec('buka kalkulator')">Kalkulator</button>
+                    <button class="siri-chip" onclick="clearLogs()">Bersihkan Layar</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Hidden diagnostic spans to preserve backend socket compatibility -->
+        <div style="display:none;">
+            <span id="cpu-cores"></span>
+            <div id="cpu-bar"></div>
+            <span id="ram-usage"></span>
+            <div id="ram-bar"></div>
+            <span id="uptime"></span>
+            <span id="host-name"></span>
+            <span id="os-platform"></span>
+            <select id="voice-select"></select>
+            <input type="checkbox" id="speech-toggle" checked>
+        </div>
+    </div>
+
+    <!-- Activation Modal -->
+    <div id="activation-modal" class="activation-modal">
+        <div class="siri-modal-card">
+            <div class="siri-sparkle">✦</div>
+            <h2>Selamat Datang di J.A.R.V.I.S.</h2>
+            <p>Asisten cerdas pribadi Anda. Klik tombol di bawah sekali untuk mengaktifkan mikrofon otomatis agar bisa langsung diajak berbicara kapan saja.</p>
+            <button id="activate-btn" class="siri-activate-btn">Mulai Jarvis</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
